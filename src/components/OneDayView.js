@@ -8,7 +8,7 @@ class OneDayView extends Component {
 
     render() {
       return (
-        <div className={"oneDayViewe"}>
+        <div className={"oneDayView"}>
             
         </div>
       );

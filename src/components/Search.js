@@ -9,16 +9,30 @@ class Search extends Component {
     constructor(props){
         super(props)
         this.state = {
-            dataSource:[]
+            dataSource:[],
+            citiesName:[]
         }
         this.handleSearch = this.handleSearch.bind(this);
         this.getLocationKeyByCityName = this.getLocationKeyByCityName.bind(this);
+        this.handelSelect = this.handelSelect.bind(this);
      }
 
      //tel-aviv location key: 215854
 
+     handelSelect = (selectedCity) => {
+
+        const city = Object.values(this.state.dataSource)
+          .filter(city => city.locationName == selectedCity)[0];
+
+
+       // const locationKey = this.state.dataSource.filter((city) => city.citiesName === selectedCity )
+      
+
+        
+        this.props.setTodayCityWeatherByLocationKey(city.locationKey);
+     }
+
     handleSearch = debounce(city => {
-        debugger
         this.getLocationKeyByCityName(city)
     }, 1000)
 
@@ -31,12 +45,18 @@ class Search extends Component {
         const url = "/locations/v1/cities/autocomplete";
         Axios.get(url, { params }) // Call the fetch function passing the url of the API as a parameter
         .then((res) => {
-            let dataSource = [];
-            Object.values(res.data).forEach((city)=> {
-                dataSource.push(city.LocalizedName)
+            const citiesName = [];
+            const dataSource = []
+            Object.values(res.data).forEach((location)=> {
+                dataSource.push({
+                    locationName:location.LocalizedName, locationKey:location.Key
+                })
+                citiesName.push(location.LocalizedName)
             })
+   
             this.setState({
-                dataSource: dataSource
+                dataSource: dataSource,
+                citiesName: citiesName
             })
         })
         .catch((err)=> {
@@ -46,15 +66,15 @@ class Search extends Component {
     
 
     render() {
-        const { dataSource } = this.state;
+        const { citiesName } = this.state;
       return (
         <div className={"search"}>
             <AutoComplete
-            dataSource={dataSource}
+            dataSource={citiesName}
             placeholder="Enter your city"
-            prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }}
-                     />}
+            prefix={<Icon type="search" style={{ color: 'rgba(0,0,0,.25)' }}/>}
             onChange={this.handleSearch}
+            onSelect={this.handelSelect}
             />
         </div>
       );

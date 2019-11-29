@@ -9,7 +9,7 @@ class OneDayView extends Component {
     render() {
       return (
         <div className={"oneDayView"}>
-            
+            <h1>One day view {this.props.data.Date}</h1>
         </div>
       );
     }

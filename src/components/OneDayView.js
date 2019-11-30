@@ -11,8 +11,7 @@ class OneDayView extends Component {
      formatDate(date) {
       var d = new Date(date),
           month = '' + (d.getMonth() + 1),
-          day = '' + d.getDate(),
-          year = d.getFullYear();
+          day = '' + d.getDate()
 
       if (month.length < 2) 
           month = '0' + month;
@@ -35,15 +34,14 @@ class OneDayView extends Component {
       
       return (
         <div className={"oneDayView"}>
-            {/* One day view {this.props.data.Date} */}
             <div className={"iconArea"}>
              <img src={iconUrl}/>
             </div>
             <div className={"contentArea"}>
               <div className={"weatherContent"}>
               {forecast.Temperature.Maximum.Value}
-              {forecast.Temperature.Maximum.Unit}
-              /
+              {forecast.Temperature.Maximum.Unit} 
+              {" "}/{" "} 
               {forecast.Temperature.Minimum.Value}
               {forecast.Temperature.Minimum.Unit}
               </div>

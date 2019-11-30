@@ -10,22 +10,30 @@
 }
 .WeatherText{
     color:white;
-    font-size: 2rem;
-    margin-top: -9px !important;
+    font-size: 2.4rem;
 }
 .weekly{
-    margin-top: 2rem;
+    margin-top: 3rem;
     margin-bottom:0px;
-    text-decoration: underline;
+    color:white;
 }
 .title{
     color:white;
     font-size: 3rem;
     margin-bottom:0px !important;
+    margin-top:2rem;
 }
 .temp{
     font-size: 1.4rem;
+    margin-top: 0px !important;
 }
 .city{
-    margin-bottom: -24px !important;
+    margin-bottom: 0px !important;
+}
+.saveIcon svg{
+    height: 2rem !important;
+    width: 2rem !important;
+}
+.mainIcon{
+    width: 10rem;
 }

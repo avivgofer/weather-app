@@ -37,6 +37,7 @@ class Search extends Component {
     }, 1000)
 
     getLocationKeyByCityName = (cityName) => {
+        debugger
         const params = {
             apikey: tempApiKey,
             q: cityName,
@@ -45,6 +46,7 @@ class Search extends Component {
         const url = "/locations/v1/cities/autocomplete";
         Axios.get(url, { params }) // Call the fetch function passing the url of the API as a parameter
         .then((res) => {
+            debugger
             const citiesName = [];
             const dataSource = []
             Object.values(res.data).forEach((location)=> {
@@ -60,6 +62,7 @@ class Search extends Component {
             })
         })
         .catch((err)=> {
+            debugger
         });
 
       }

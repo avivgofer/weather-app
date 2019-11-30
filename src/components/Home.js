@@ -6,13 +6,8 @@ import Axios from 'axios'
 
 
 
-
-
-
-
-
-
-const tempApiKey = "GqyBoSIAIF3DOeqGW6w1wJcT9SZJ6fAF"
+const tempApiKey11 = "GqyBoSIAIF3DOeqGW6w1wJcT9SZJ6fAF"
+const tempApiKey = "FT1laPtWRKZwbyHHKbBQ7VIjpVIL0ytm"
 const myRealApiKey = "%09SJI87zSnduKJGlRMjnocFnsWtJwEJ3DR"
 
 const resExample = 
@@ -69,17 +64,17 @@ class Home extends Component {
                this.setState({
                    todayData: res.data[0],
                    locationKey: cityLocationKey
-               })
+               },this.set5Daysforecasts)
             })
             .catch((err)=> {
                 debugger
             });
       }
 
-      set5DaysForecast = () => {
+      set5Daysforecasts = () => {
        
         const url = `/forecasts/v1/daily/5day/${this.state.locationKey}`;
-        const params = {apikey: tempApiKey};
+        const params = {apikey: tempApiKey, language: 'he-IL'};
             Axios.get(url, {params}) // Call the fetch function passing the url of the API as a parameter
             .then((res) => {
                this.setState({
@@ -92,8 +87,8 @@ class Home extends Component {
             });
       }
 
-      componentDidMount() {
-          this.set5DaysForecast();
+      componentWillMount() {
+          this.set5Daysforecasts();
       }
 
       //tel-aviv location key: 215854
@@ -102,16 +97,8 @@ class Home extends Component {
         const forecasts = this.state.forecasts;
       return (
         <div className={"home"}>
-        <Search setTodayCityWeatherByLocationKey={this.setTodayCityWeatherByLocationKey}/>
-        <TodayView data={this.state.todayData} />
-        
-       
-        <button onClick={this.click}>click me</button>
-        {
-            Object.values(forecasts).map((forecast) =>
-                <OneDayView data={forecast} />
-            )
-        }
+            <Search setTodayCityWeatherByLocationKey={this.setTodayCityWeatherByLocationKey}/>
+            <TodayView data={this.state.todayData} forecasts={forecasts} />
         </div>
       );
     }

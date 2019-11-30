@@ -1,5 +1,7 @@
 
 import React, { Component } from 'react';
+import OneDayView from './OneDayView'
+import '../style/TodayView.css'
 
 
 class TodayView extends Component {
@@ -8,9 +10,12 @@ class TodayView extends Component {
         this.state = {}
      }
 
+     to2Digits = (number) =>  number < 10 ? ("0" + number) : number
+     
+
      componentDidMount(){
          this.setState({
-             iconUrl:`https://developer.accuweather.com/sites/default/files/0${this.props.data.WeatherIcon}-s.png`
+             iconUrl:`https://developer.accuweather.com/sites/default/files/${this.to2Digits(this.props.data.WeatherIcon)}-s.png`
          })
      }
 
@@ -20,18 +25,27 @@ class TodayView extends Component {
       return (
         <div className={"todayView"}>
             <div className="title">
-                     <img src={this.state.iconUrl}/>
-                     <span>
-                         {data.Temperature.Metric.Value}
-                         {data.Temperature.Metric.Unit}
-                     </span>
-                <span>
+            <div className={"city"}>
                     Tel-Aviv
                     
-                </span>
+            </div>
+            <img src={this.state.iconUrl}/>
+            <span className={"temp"}>
+                {data.Temperature.Metric.Value}
+                {data.Temperature.Metric.Unit}
+            </span>
+                
             </div>
             <div className={"WeatherText"}>
                 {this.props.data.WeatherText}
+            </div>
+            <h1 className={"weekly"}>Weekly</h1>
+            <div className={"weekForecast"}>
+                {
+                Object.values(this.props.forecasts).map((forecast,idx) =>
+                    <OneDayView key={idx} data={forecast} />
+                )
+                }
             </div>
         </div>
       );

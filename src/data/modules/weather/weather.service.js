@@ -1,5 +1,5 @@
 import Axios from "axios";
-const TEMP_API_KEY = "IvCdBT9UGvFNmXa3fCkWNdDwa84mNvIC";
+const TEMP_API_KEY = "FT1laPtWRKZwbyHHKbBQ7VIjpVIL0ytm";
 
 async function getLocationKeyByCityName(cityName) {
   const params = {
@@ -23,8 +23,15 @@ async function get5DaysWeatherByLocationKey(locationKey) {
   return Axios.get(url, { params }); // Call the fetch function passing the url of the API as a parameter
 }
 
+async function getCityByGeoLocation(latitude, longitude) {
+  const url = "/locations/v1/cities/geoposition/search";
+  const params = { apikey: TEMP_API_KEY, q: latitude + "," + longitude };
+  return Axios.get(url, { params }); // Call the fetch function passing the url of the API as a parameter
+}
+
 export {
   getLocationKeyByCityName,
   getTodayWeatherByLocationKey,
-  get5DaysWeatherByLocationKey
+  get5DaysWeatherByLocationKey,
+  getCityByGeoLocation
 };

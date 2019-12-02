@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 import { weatherSelector } from "../data/modules/weather/weather.selectors";
 import { getLocationKeyByCityNameAction } from "../data/modules/weather/weather.actions";
 var debounce = require("debounce");
-const tempApiKey = "IAauRqa8Bxf9yBAxchkGcvLr0aj6BDos";
-const d = "GqyBoSIAIF3DOeqGW6w1wJcT9SZJ6fAF";
 class Search extends Component {
   constructor(props) {
     super(props);

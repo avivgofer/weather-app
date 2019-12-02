@@ -23,7 +23,7 @@ class CityView extends Component {
             {this.props.city.WeatherText}
           </div>
           <div className="cityIconArea">
-            <img src={iconUrl} />
+            <img alt="weatherIcon" src={iconUrl} />
           </div>
         </div>
       </div>

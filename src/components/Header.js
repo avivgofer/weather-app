@@ -14,7 +14,7 @@ class Header extends Component {
   }
 
   handleClick = btn => {
-    if (btn.key == "home") {
+    if (btn.key === "home") {
       this.setState({
         favStyle: "",
         homeStyle: "ant-menu-item-active"
@@ -35,13 +35,13 @@ class Header extends Component {
           mode="horizontal"
           onClick={this.handleClick}
         >
-          <Menu.Item key="home" className={this.state.homeStyle}>
+          <Menu.Item key="home">
             <Icon type="home" />
             <NavLink className="resetCss" to="/">
               Home
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="favorites" className={this.state.favStyle}>
+          <Menu.Item key="favorites">
             <Icon type="heart" />
             <NavLink className="resetCss" to="/favorites">
               Favorites

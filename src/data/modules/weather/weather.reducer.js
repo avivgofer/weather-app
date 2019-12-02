@@ -4,6 +4,7 @@ import {
   GET_TODAY_WEATHER_BY_LOCATION_KEY_SUCCESS,
   GET_LOCATION_KEY_BY_CITY_NAME_SUCCESS,
   GET_5DAYS_WEATHER_BY_LOCATION_KEY_SUCCESS,
+  GET_CITY_BY_GEO_LOCATION_SUCCESS,
   SAVE_FAVORITE_CITY,
   REMOVE_FAVORITE_CITY
 } from "./weather.types";
@@ -12,6 +13,7 @@ const defaultState = {
   current5DaysWeather: "",
   currentWeather: "",
   locationKeyResult: "",
+  cityFromGeoLocation: {},
   favorites: []
 };
 
@@ -38,9 +40,13 @@ export default (state = defaultState, action) => {
       });
     }
     case GET_5DAYS_WEATHER_BY_LOCATION_KEY_SUCCESS: {
-      // console.log(get(action.payload, "data"));
       return Object.assign({}, state, {
         current5DaysWeather: get(action.payload, "data")
+      });
+    }
+    case GET_CITY_BY_GEO_LOCATION_SUCCESS: {
+      return Object.assign({}, state, {
+        cityFromGeoLocation: get(action.payload, "data")
       });
     }
     default:

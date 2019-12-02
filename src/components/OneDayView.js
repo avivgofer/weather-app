@@ -37,7 +37,7 @@ class OneDayView extends Component {
     return (
       <div className="oneDayView">
         <div className="iconArea">
-          <img src={iconUrl} />
+          <img alt="weatherIcon" src={iconUrl} />
         </div>
         <div className="contentArea">
           <div className="weatherContent">

@@ -1,7 +1,8 @@
 import {
   getLocationKeyByCityName,
   getTodayWeatherByLocationKey,
-  get5DaysWeatherByLocationKey
+  get5DaysWeatherByLocationKey,
+  getCityByGeoLocation
 } from "./weather.service";
 import {
   GET_LOCATION_KEY_BY_CITY_NAME_START,
@@ -13,6 +14,9 @@ import {
   GET_TODAY_WEATHER_BY_LOCATION_KEY_START,
   GET_TODAY_WEATHER_BY_LOCATION_KEY_SUCCESS,
   GET_TODAY_WEATHER_BY_LOCATION_KEY_FAILED,
+  GET_CITY_BY_GEO_LOCATION_START,
+  GET_CITY_BY_GEO_LOCATION_SUCCESS,
+  GET_CITY_BY_GEO_LOCATION_FAILED,
   SAVE_FAVORITE_CITY,
   REMOVE_FAVORITE_CITY
 } from "./weather.types";
@@ -50,6 +54,19 @@ export const get5daysWeatherByLocationKeyAction = cityKey => dispatch => {
       GET_5DAYS_WEATHER_BY_LOCATION_KEY_START,
       GET_5DAYS_WEATHER_BY_LOCATION_KEY_SUCCESS,
       GET_5DAYS_WEATHER_BY_LOCATION_KEY_FAILED
+    ],
+    payload: promise
+  });
+  return promise;
+};
+
+export const getCityByGeoLocationAction = (latitude, longitude) => dispatch => {
+  const promise = getCityByGeoLocation(latitude, longitude);
+  dispatch({
+    type: [
+      GET_CITY_BY_GEO_LOCATION_START,
+      GET_CITY_BY_GEO_LOCATION_SUCCESS,
+      GET_CITY_BY_GEO_LOCATION_FAILED
     ],
     payload: promise
   });

@@ -21,7 +21,7 @@ class TodayView extends Component {
   save = () => {
     const cities = get(this.props, "weather.favorites");
     const cityName = get(this.props, "city");
-    if (!cities.some(city => city.cityName == this.props.city)) {
+    if (!cities.some(city => city.cityName === this.props.city)) {
       this.props.saveFavoriteCityAction({ ...this.props.data, cityName });
     }
   };
@@ -68,7 +68,11 @@ class TodayView extends Component {
               {cityName}
             </SplitText>
           </div>
-          <img className="mainIcon" src={this.state.iconUrl} />
+          <img
+            alt="todayWeaterIcon"
+            className="mainIcon"
+            src={this.state.iconUrl}
+          />
           <div className="temp">
             {data.Temperature.Metric.Value}
             {data.Temperature.Metric.Unit}

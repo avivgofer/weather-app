@@ -1,24 +1,19 @@
 import React, { Component } from "react";
 import Search from "./Search";
 import TodayView from "./TodayView";
-import OneDayView from "./OneDayView";
-import Axios from "axios";
-import { message } from "antd";
-import { toStatement, throwStatement } from "@babel/types";
 import { connect } from "react-redux";
 import {
   getLocationKeyByCityNameAction,
   get5daysWeatherByLocationKeyAction,
-  getTodayCityWeatherByLocationKeyAction
+  getTodayCityWeatherByLocationKeyAction,
+  getCityByGeoLocationAction
 } from "../data/modules/weather/weather.actions";
 import { weatherSelector } from "../data/modules/weather/weather.selectors";
 import { createSelector } from "reselect";
 import get from "lodash/get";
-
-const tempApiKey11 = "GqyBoSIAIF3DOeqGW6w1wJcT9SZJ6fAF";
-const tempApiKeyddd = "FT1laPtWRKZwbyHHKbBQ7VIjpVIL0ytm";
-const tempApiKey = "IAauRqa8Bxf9yBAxchkGcvLr0aj6BDos";
-const myRealApiKey = "%09SJI87zSnduKJGlRMjnocFnsWtJwEJ3DR";
+import Temp from "./Temp";
+import Header from "./Header";
+import "../style/Home.css";
 
 class Home extends Component {
   constructor(props) {
@@ -30,11 +25,14 @@ class Home extends Component {
     };
   }
 
+  saveCoords = async (latitude, longitude) => {
+    await this.props.getCityByGeoLocationAction(latitude, longitude);
+  };
+
   setTodayCityWeatherByLocationKey = async (city = "Tel Aviv") => {
-    debugger;
     await this.props.getLocationKeyByCityNameAction(city);
     const cityLocationKey = get(this.props, "weather.locationKeyResult[0].Key");
-    debugger;
+
     await this.props.getTodayCityWeatherByLocationKeyAction(cityLocationKey);
 
     const inFavotiteProps = get(this.props, "weather.favorites").some(
@@ -59,29 +57,59 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    const cityName = get(this.props, "location.cityLocation");
-    this.setTodayCityWeatherByLocationKey(cityName);
+    //if is not undefined it's mean came from NavLink (from Favorite)
+    const cityName = this.props.location.cityLocation;
+    if (cityName) {
+      this.setTodayCityWeatherByLocationKey(cityName);
+    } else {
+      const cityName = get(
+        this.props.weather,
+        "cityFromGeoLocation.LocalizedName"
+      );
+      if (cityName) {
+        this.setTodayCityWeatherByLocationKey(cityName);
+      }
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const currentCityName = get(
+      this.props.weather,
+      "cityFromGeoLocation.LocalizedName"
+    );
+    const prevCityName = get(
+      prevProps.weather,
+      "cityFromGeoLocation.LocalizedName"
+    );
+    if (currentCityName !== prevCityName) {
+      this.setTodayCityWeatherByLocationKey(currentCityName);
+    }
   }
 
   render() {
     const { forecasts, city, inFavotiteProps } = this.state;
     return (
-      <div className="home">
-        <Search
-          setTodayCityWeatherByLocationKey={
-            this.setTodayCityWeatherByLocationKey
-          }
-        />
-        {this.state.todayData ? (
-          <TodayView
-            data={this.state.todayData}
-            forecasts={forecasts}
-            city={city}
-            inFavotiteProps={inFavotiteProps}
+      <div>
+        <Header />
+        <div className="home">
+          <h1>Home</h1>
+          <Temp saveCoords={this.saveCoords} />
+          <Search
+            setTodayCityWeatherByLocationKey={
+              this.setTodayCityWeatherByLocationKey
+            }
           />
-        ) : (
-          <React.Fragment />
-        )}
+          {this.state.todayData ? (
+            <TodayView
+              data={this.state.todayData}
+              forecasts={forecasts}
+              city={city}
+              inFavotiteProps={inFavotiteProps}
+            />
+          ) : (
+            <React.Fragment />
+          )}
+        </div>
       </div>
     );
   }
@@ -98,7 +126,8 @@ const finalSelector = createSelector(
 const mapDispatchToProps = {
   getLocationKeyByCityNameAction,
   get5daysWeatherByLocationKeyAction,
-  getTodayCityWeatherByLocationKeyAction
+  getTodayCityWeatherByLocationKeyAction,
+  getCityByGeoLocationAction
 };
 
 export default connect(

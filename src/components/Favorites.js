@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Menu, Icon } from "antd";
 import CityView from "./CityView";
 import "../style/Favorites.css";
 import get from "lodash/get";
@@ -8,7 +7,8 @@ import { connect } from "react-redux";
 import { weatherSelector } from "../data/modules/weather/weather.selectors";
 import { removeFavoriteCityAction } from "../data/modules/weather/weather.actions";
 import "../style/Reset.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Header from "./Header";
 
 class Favorites extends Component {
   constructor(props) {
@@ -19,20 +19,24 @@ class Favorites extends Component {
   render() {
     const favoriteCities = get(this.props, "weather.favorites", []);
     return (
-      <div className="favoritesContainer">
-        <h1>Favorites</h1>
-        <div className="favorites">
-          {favoriteCities.map((city, idx) => (
-            <NavLink
-              className="resetCss"
-              to={{
-                pathname: "/",
-                cityLocation: city.cityName
-              }}
-            >
-              <CityView city={city} key={idx} />
-            </NavLink>
-          ))}
+      <div>
+        <Header />
+        <div className="favoritesContainer">
+          <h1>Favorites</h1>
+          <div className="favorites">
+            {favoriteCities.map((city, idx) => (
+              <Link
+                to={{
+                  key: idx,
+                  pathname: "/",
+                  cityLocation: city.cityName,
+                  aboutProps: { a: "dd" }
+                }}
+              >
+                <CityView city={city} />
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     );

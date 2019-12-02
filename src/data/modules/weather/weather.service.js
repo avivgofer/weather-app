@@ -4,10 +4,8 @@ const TEMP_API_KEY = "IvCdBT9UGvFNmXa3fCkWNdDwa84mNvIC";
 async function getLocationKeyByCityName(cityName) {
   const params = {
     apikey: TEMP_API_KEY,
-    q: cityName,
-    language: "en-us"
+    q: cityName
   };
-  console.log({ params });
   const url = "/locations/v1/cities/autocomplete";
   return Axios.get(url, { params });
 }
@@ -21,7 +19,7 @@ async function getTodayWeatherByLocationKey(locationKey) {
 
 async function get5DaysWeatherByLocationKey(locationKey) {
   const url = `/forecasts/v1/daily/5day/${locationKey}`;
-  const params = { apikey: TEMP_API_KEY, language: "he-IL" };
+  const params = { apikey: TEMP_API_KEY, language: "he-IL", metric: true };
   return Axios.get(url, { params }); // Call the fetch function passing the url of the API as a parameter
 }
 

@@ -1,39 +1,39 @@
-.todayView{
-    font-family: 'Nunito', sans-serif;
+.todayView {
+  font-family: "Nunito", sans-serif;
 }
-.weekForecast{
-    width:50%;
-    margin:auto;
-    display: flex;
-    flex-flow: row wrap;
-    position: relative;
+.weekForecast {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
 }
-.WeatherText{
-    color:white;
-    font-size: 2.4rem;
+.WeatherText {
+  color: white;
+  font-size: 2.4rem;
 }
-.weekly{
-    margin-top: 3rem;
-    margin-bottom:0px;
-    color:white;
+.weekly {
+  margin-top: 3rem;
+  margin-bottom: 0px;
+  color: white;
 }
-.title{
-    color:white;
-    font-size: 3rem;
-    margin-bottom:0px !important;
-    margin-top:2rem;
+.title {
+  color: white;
+  font-size: 3rem;
+  margin-bottom: 0px !important;
+  margin-top: 2rem;
 }
-.temp{
-    font-size: 1.4rem;
-    margin-top: 0px !important;
+.temp {
+  font-size: 1.4rem;
+  margin-top: 0px !important;
 }
-.city{
-    margin-bottom: 0px !important;
+.city {
+  margin-bottom: 0px !important;
 }
-.saveIcon svg{
-    height: 2rem !important;
-    width: 2rem !important;
+.saveIcon svg {
+  height: 2rem !important;
+  width: 2rem !important;
 }
-.mainIcon{
-    width: 10rem;
+.mainIcon {
+  width: 10rem;
 }

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Menu, Icon } from "antd";
 import "../style/Header.css";
+import { NavLink } from "react-router-dom";
+import "../style/Reset.css";
 
 class Header extends Component {
   constructor(props) {
@@ -9,44 +11,41 @@ class Header extends Component {
       favStyle: "",
       homeStyle: "ant-menu-item-active"
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(btn) {
+  handleClick = btn => {
     if (btn.key == "home") {
-      this.setState(
-        {
-          favStyle: "",
-          homeStyle: "ant-menu-item-active"
-        },
-        this.props.pageChange
-      );
+      this.setState({
+        favStyle: "",
+        homeStyle: "ant-menu-item-active"
+      });
     } else {
-      this.setState(
-        {
-          favStyle: "ant-menu-item-active",
-          homeStyle: ""
-        },
-        this.props.pageChange
-      );
+      this.setState({
+        favStyle: "ant-menu-item-active",
+        homeStyle: ""
+      });
     }
-  }
+  };
 
   render() {
     return (
-      <div className={"home"}>
+      <div className="home">
         <Menu
-          onClick={this.handleClick}
           selectedKeys={[this.state.current]}
           mode="horizontal"
+          onClick={this.handleClick}
         >
           <Menu.Item key="home" className={this.state.homeStyle}>
             <Icon type="home" />
-            Home
+            <NavLink className="resetCss" to="/">
+              Home
+            </NavLink>
           </Menu.Item>
           <Menu.Item key="favorites" className={this.state.favStyle}>
             <Icon type="heart" />
-            Favorites
+            <NavLink className="resetCss" to="/favorites">
+              Favorites
+            </NavLink>
           </Menu.Item>
         </Menu>
       </div>

@@ -1,44 +1,46 @@
-.oneDayView{
-    margin: auto !important;
-    margin-top:1rem !important;
-    flex: 0 1 calc(20% - 8px);
-    height:6rem;
-    border-radius: 8px !important;
-    -webkit-box-shadow: 0px 0px 20px -7px rgba(43, 18, 43);
-    -moz-box-shadow: 0px 0px 20px -7px rgb(43, 18, 43);
-    box-shadow: 0px 0px 20px -7px rgba(43, 18, 43);
-    font-family: 'Nunito', sans-serif;
+.oneDayView {
+  width: 8rem;
+  margin: auto !important;
+  margin-top: 1rem !important;
+  height: 6rem;
+  border-radius: 8px !important;
+  -webkit-box-shadow: 0px 0px 20px -7px rgba(43, 18, 43);
+  -moz-box-shadow: 0px 0px 20px -7px rgb(43, 18, 43);
+  box-shadow: 0px 0px 20px -7px rgba(43, 18, 43);
+  font-family: "Nunito", sans-serif;
 }
 
-.iconArea{
-    width:100%;
-    height: 60%;
-    background-color:white;
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
+.iconArea {
+  width: 100%;
+  height: 60%;
+  background-color: white;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 }
 .iconArea img {
-    margin-top: 5px
+  margin-top: 5px;
 }
-.contentArea{
-    display: flex;
-    height: 40%;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
+.contentArea {
+  font-size: 13px;
+  display: flex;
+  height: 40%;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
-.date{
-    width:30%;
-    height: 100%;
-    background-color:#70C1B3;
-    border-bottom-right-radius: 8px;
-    line-height: 2.2rem;
-    color:white;
+.date {
+  font-size: 13px;
+  width: 30%;
+  height: 100%;
+  background-color: #70c1b3;
+  border-bottom-right-radius: 8px;
+  line-height: 2.2rem;
+  color: white;
 }
-.weatherContent{
-    width:70%;
-    height: 100%;
-    background-color:black;
-    border-bottom-left-radius: 8px;
-    line-height: 2.2rem;
-    color:white;
+.weatherContent {
+  width: 70%;
+  height: 100%;
+  background-color: black;
+  border-bottom-left-radius: 8px;
+  line-height: 2.2rem;
+  color: white;
 }

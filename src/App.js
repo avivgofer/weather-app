@@ -6,31 +6,30 @@ import Header from "./components/Header";
 import Favorites from "./components/Favorites";
 import { Provider } from "react-redux";
 import configureStore from "./config/configureStore";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      atHome: true
-    };
-    this.pageChange = this.pageChange.bind(this);
+    this.state = {};
   }
-
-  pageChange() {
-    this.setState({
-      atHome: !this.state.atHome
-    });
-  }
-
   render() {
     return (
-      <Provider store={configureStore()}>
+      <BrowserRouter>
         <div className="App">
-          <Header pageChange={this.pageChange} />
-          {this.state.atHome ? <Home /> : <Favorites />}
+          <Header />
+          <Switch>
+            <Provider store={configureStore()}>
+              <Route path="/" component={Home} exact />
+              <Route path="/favorites" component={Favorites} exact />
+            </Provider>
+          </Switch>
         </div>
-      </Provider>
+      </BrowserRouter>
     );
   }
 }
 
 export default App;
+
+//export default App;

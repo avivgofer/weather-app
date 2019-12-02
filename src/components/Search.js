@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { AutoComplete, Icon, message } from "antd";
+import { AutoComplete, Icon } from "antd";
 import "../style/Search.css";
 import get from "lodash/get";
-import Axios from "axios";
 import { createSelector } from "reselect";
 import { connect } from "react-redux";
 import { weatherSelector } from "../data/modules/weather/weather.selectors";
@@ -22,19 +21,13 @@ class Search extends Component {
     this.handelSelect = this.handelSelect.bind(this);
   }
 
-  //tel-aviv location key: 215854
-
   handelSelect = selectedCity => {
     const city = Object.values(this.state.dataSource).filter(
-      city => city.locationName == selectedCity
+      city => get(city, "locationName") === selectedCity
     )[0];
-
-    // const locationKey = this.state.dataSource.filter((city) => city.citiesName === selectedCity )
-
-    this.props.setTodayCityWeatherByLocationKey(
-      city.locationKey,
-      city.locationName
-    );
+    if (city) {
+      this.props.setTodayCityWeatherByLocationKey(city.locationName);
+    }
   };
 
   handleSearch = debounce(city => {

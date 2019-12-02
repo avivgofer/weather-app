@@ -9,8 +9,7 @@ import { connect } from "react-redux";
 import {
   getLocationKeyByCityNameAction,
   get5daysWeatherByLocationKeyAction,
-  getTodayCityWeatherByLocationKeyAction,
-  saveFavoriteCityAction
+  getTodayCityWeatherByLocationKeyAction
 } from "../data/modules/weather/weather.actions";
 import { weatherSelector } from "../data/modules/weather/weather.selectors";
 import { createSelector } from "reselect";
@@ -27,30 +26,26 @@ class Home extends Component {
     this.state = {
       todayData: "",
       locationKey: 215854,
-      forecasts: [],
-      city: "Tel Aviv"
+      forecasts: []
     };
-    this.setTodayCityWeatherByLocationKey = this.setTodayCityWeatherByLocationKey.bind(
-      this
-    );
   }
 
-  setTodayCityWeatherByLocationKey = async (
-    cityLocationKey = "215854",
-    city = "Tel Aviv"
-  ) => {
+  setTodayCityWeatherByLocationKey = async (city = "Tel Aviv") => {
+    debugger;
     await this.props.getLocationKeyByCityNameAction(city);
-    await this.props.getTodayCityWeatherByLocationKeyAction(
-      get(this.props, "weather.locationKeyResult[0].Key")
-    );
+    const cityLocationKey = get(this.props, "weather.locationKeyResult[0].Key");
+    debugger;
+    await this.props.getTodayCityWeatherByLocationKeyAction(cityLocationKey);
 
-    const favoriteAllready = Object.keys(localStorage).some(x => x === city);
+    const inFavotiteProps = get(this.props, "weather.favorites").some(
+      favCity => favCity === city
+    );
     this.setState(
       {
         todayData: get(this.props, "weather.currentWeather[0]"),
-        locationKey: cityLocationKey,
+        locationKey: get(this.props, "weather.locationKeyResult[0].Key"),
         city: city ? city : "Tel Aviv",
-        favoriteAllready: favoriteAllready
+        inFavotiteProps: inFavotiteProps
       },
       this.set5Daysforecasts
     );
@@ -63,14 +58,15 @@ class Home extends Component {
     });
   };
 
-  componentWillMount() {
-    this.setTodayCityWeatherByLocationKey();
+  componentDidMount() {
+    const cityName = get(this.props, "location.cityLocation");
+    this.setTodayCityWeatherByLocationKey(cityName);
   }
 
   render() {
-    const { forecasts, city, favoriteAllready } = this.state;
+    const { forecasts, city, inFavotiteProps } = this.state;
     return (
-      <div className={"home"}>
+      <div className="home">
         <Search
           setTodayCityWeatherByLocationKey={
             this.setTodayCityWeatherByLocationKey
@@ -81,7 +77,7 @@ class Home extends Component {
             data={this.state.todayData}
             forecasts={forecasts}
             city={city}
-            favoriteAllready={favoriteAllready}
+            inFavotiteProps={inFavotiteProps}
           />
         ) : (
           <React.Fragment />
@@ -102,7 +98,6 @@ const finalSelector = createSelector(
 const mapDispatchToProps = {
   getLocationKeyByCityNameAction,
   get5daysWeatherByLocationKeyAction,
-  saveFavoriteCityAction,
   getTodayCityWeatherByLocationKeyAction
 };
 

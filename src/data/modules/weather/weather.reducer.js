@@ -4,7 +4,8 @@ import {
   GET_TODAY_WEATHER_BY_LOCATION_KEY_SUCCESS,
   GET_LOCATION_KEY_BY_CITY_NAME_SUCCESS,
   GET_5DAYS_WEATHER_BY_LOCATION_KEY_SUCCESS,
-  SAVE_FAVORITE_CITY
+  SAVE_FAVORITE_CITY,
+  REMOVE_FAVORITE_CITY
 } from "./weather.types";
 
 const defaultState = {
@@ -23,7 +24,12 @@ export default (state = defaultState, action) => {
     }
     case SAVE_FAVORITE_CITY: {
       return Object.assign({}, state, {
-        favorites: state.favorites.push(action.payload)
+        favorites: [...state.favorites, action.payload]
+      });
+    }
+    case REMOVE_FAVORITE_CITY: {
+      return Object.assign({}, state, {
+        favorites: state.favorites.filter(city => city !== action.payload)
       });
     }
     case GET_TODAY_WEATHER_BY_LOCATION_KEY_SUCCESS: {
@@ -32,7 +38,7 @@ export default (state = defaultState, action) => {
       });
     }
     case GET_5DAYS_WEATHER_BY_LOCATION_KEY_SUCCESS: {
-      console.log(get(action.payload, "data"));
+      // console.log(get(action.payload, "data"));
       return Object.assign({}, state, {
         current5DaysWeather: get(action.payload, "data")
       });

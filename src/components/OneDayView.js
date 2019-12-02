@@ -35,17 +35,17 @@ class OneDayView extends Component {
 
     const { Maximum, Minimum } = get(forecast, "Temperature", {});
     return (
-      <div className={"oneDayView"}>
-        <div className={"iconArea"}>
+      <div className="oneDayView">
+        <div className="iconArea">
           <img src={iconUrl} />
         </div>
-        <div className={"contentArea"}>
-          <div className={"weatherContent"}>
+        <div className="contentArea">
+          <div className="weatherContent">
             {Maximum.Value}
             {Maximum.Unit} / {Minimum.Value}
             {Minimum.Unit}
           </div>
-          <div className={"date"}>{date}</div>
+          <div className="date">{date}</div>
         </div>
       </div>
     );

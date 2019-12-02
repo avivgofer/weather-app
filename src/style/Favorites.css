@@ -3,6 +3,7 @@
   flex-flow: row wrap;
   margin: auto;
   width: 80%;
+  margin-top: 2rem !important;
 }
 .favoritesContainer h1 {
   color: white;

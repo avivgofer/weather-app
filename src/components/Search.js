@@ -58,7 +58,7 @@ class Search extends Component {
       <div className={"search"}>
         <AutoComplete
           dataSource={citiesName}
-          placeholder="Enter your city"
+          placeholder="Enter city"
           prefix={<Icon type="search" style={{ color: "rgba(0,0,0,.25)" }} />}
           onChange={this.handleSearch}
           onSelect={this.handelSelect}

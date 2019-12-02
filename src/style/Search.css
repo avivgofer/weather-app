@@ -1,6 +1,9 @@
-.search{
-    width:30%;
-    margin:auto;
-    margin-top: 3rem !important;
-    margin-bottom: 1rem;
+.search {
+  width: 30%;
+  margin: auto;
+  margin-top: 3rem !important;
+  margin-bottom: 1rem;
+}
+.search div {
+  width: 15rem;
 }

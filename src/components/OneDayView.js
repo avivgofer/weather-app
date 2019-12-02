@@ -21,13 +21,29 @@ class OneDayView extends Component {
     return [day, month].join("/");
   }
 
+  getDayNameByDateString = dateString => {
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    const date = new Date(dateString);
+    return days[date.getDay()];
+  };
+
   render() {
     const forecast = this.props.data;
     let iconNumber = "";
     let date = "";
+    let dateName = "";
     if (forecast) {
       iconNumber = forecast.Day.Icon;
       date = this.formatDate(forecast.Date);
+      dateName = this.getDayNameByDateString(forecast.Date);
     }
     const iconUrl = `https://developer.accuweather.com/sites/default/files/${this.to2Digits(
       iconNumber
@@ -36,14 +52,18 @@ class OneDayView extends Component {
     const { Maximum, Minimum } = get(forecast, "Temperature", {});
     return (
       <div className="oneDayView">
+        {dateName}
         <div className="iconArea">
           <img alt="weatherIcon" src={iconUrl} />
         </div>
         <div className="contentArea">
           <div className="weatherContent">
-            {Maximum.Value}
-            {Maximum.Unit} / {Minimum.Value}
-            {Minimum.Unit}
+            <span className="dayValue">{Maximum.Value + "C"} / </span>
+
+            <span className="nightValue">
+              {Minimum.Value + "C"}
+              {}
+            </span>
           </div>
           <div className="date">{date}</div>
         </div>

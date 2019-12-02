@@ -22,18 +22,17 @@ class Favorites extends Component {
       <div>
         <Header />
         <div className="favoritesContainer">
-          <h1>Favorites</h1>
           <div className="favorites">
             {favoriteCities.map((city, idx) => (
               <Link
                 to={{
-                  key: idx,
+                  key: idx + 100,
                   pathname: "/",
                   cityLocation: city.cityName,
                   aboutProps: { a: "dd" }
                 }}
               >
-                <CityView city={city} />
+                <CityView key={idx + 200} city={city} />
               </Link>
             ))}
           </div>

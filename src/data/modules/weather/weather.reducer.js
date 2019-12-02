@@ -31,7 +31,9 @@ export default (state = defaultState, action) => {
     }
     case REMOVE_FAVORITE_CITY: {
       return Object.assign({}, state, {
-        favorites: state.favorites.filter(city => city !== action.payload)
+        favorites: state.favorites.filter(
+          city => city.cityName !== action.payload
+        )
       });
     }
     case GET_TODAY_WEATHER_BY_LOCATION_KEY_SUCCESS: {

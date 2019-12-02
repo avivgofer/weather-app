@@ -13,7 +13,6 @@ import { createSelector } from "reselect";
 import get from "lodash/get";
 import Temp from "./Temp";
 import Header from "./Header";
-import "../style/Home.css";
 
 class Home extends Component {
   constructor(props) {
@@ -92,7 +91,6 @@ class Home extends Component {
       <div>
         <Header />
         <div className="home">
-          <h1>Home</h1>
           <Temp saveCoords={this.saveCoords} />
           <Search
             setTodayCityWeatherByLocationKey={

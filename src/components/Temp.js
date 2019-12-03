@@ -10,7 +10,7 @@ class Temp extends Component {
     };
   }
   componentDidUpdate() {
-    //because we need it after update but only one time otherwise it's calling 251 times
+    //because we need it after update but only one time
     if (get(this.props, "coords.latitude", false) && this.state.flag) {
       this.setState({
         flag: false

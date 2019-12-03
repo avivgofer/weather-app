@@ -7,3 +7,7 @@
 .search div {
   width: 15rem;
 }
+.search-btn {
+  height: 2rem;
+  margin-right: -12px;
+}

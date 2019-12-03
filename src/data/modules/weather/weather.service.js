@@ -1,5 +1,5 @@
 import Axios from "axios";
-const TEMP_API_KEY = "SJI87zSnduKJGlRMjnocFnsWtJwEJ3DR";
+const TEMP_API_KEY = "IAauRqa8Bxf9yBAxchkGcvLr0aj6BDos";
 const accuWeatherUrl = "https://dataservice.accuweather.com";
 
 async function getLocationKeyByCityName(cityName) {

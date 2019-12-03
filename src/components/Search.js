@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { AutoComplete, Icon } from "antd";
+import { AutoComplete, Icon, Input, Button } from "antd";
 import "../style/Search.css";
 import get from "lodash/get";
 import { createSelector } from "reselect";
@@ -29,6 +29,9 @@ class Search extends Component {
   };
 
   handleSearch = debounce(city => {
+    this.setState({
+      citiesName: []
+    });
     this.getLocationKeyByCityName(city);
   }, 1000);
 
@@ -59,10 +62,17 @@ class Search extends Component {
         <AutoComplete
           dataSource={citiesName}
           placeholder="Enter city"
-          prefix={<Icon type="search" style={{ color: "rgba(0,0,0,.25)" }} />}
           onChange={this.handleSearch}
           onSelect={this.handelSelect}
-        />
+        >
+          <Input
+            suffix={
+              <Button className="search-btn" size="large" type="primary">
+                <Icon type="search" />
+              </Button>
+            }
+          />
+        </AutoComplete>
       </div>
     );
   }

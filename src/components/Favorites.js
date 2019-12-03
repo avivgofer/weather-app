@@ -9,6 +9,8 @@ import { removeFavoriteCityAction } from "../data/modules/weather/weather.action
 import "../style/Reset.css";
 import { Link } from "react-router-dom";
 import Header from "./Header";
+const uuidv1 = require("uuid/v1");
+const uuidv2 = require("uuid/v4");
 
 class Favorites extends Component {
   constructor(props) {
@@ -26,13 +28,12 @@ class Favorites extends Component {
             {favoriteCities.map((city, idx) => (
               <Link
                 to={{
-                  key: idx + 100,
+                  key: uuidv1(),
                   pathname: "/",
-                  cityLocation: city.cityName,
-                  aboutProps: { a: "dd" }
+                  cityLocation: city.cityName
                 }}
               >
-                <CityView key={idx + 200} city={city} />
+                <CityView key={uuidv2()} city={city} />
               </Link>
             ))}
           </div>

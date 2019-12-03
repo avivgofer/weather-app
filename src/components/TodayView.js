@@ -68,7 +68,7 @@ class TodayView extends Component {
               {cityName}
             </SplitText>
           </div>
-          <div className="WeatherText">{this.props.data.WeatherText}</div>
+          <div className="weatherText">{this.props.data.WeatherText}</div>
           <div className="temp">
             {data.Temperature.Metric.Value}
             {data.Temperature.Metric.Unit}
